@@ -29,7 +29,9 @@ RSpec.describe PostsController, type: :controller do
   # Post. As you add validations to Post, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { title: 'First post',
+    introduction: 'This is a first post',
+    body: 'This is the body of the first post' }
   }
 
   let(:invalid_attributes) {
