@@ -1,10 +1,13 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_author, only: [:index]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if params[:author_id]
+      @posts = Post.where(author_id: params[:author_id])
+    end
   end
 
   # GET /posts/1
@@ -24,7 +27,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = @author.posts.create(post_params)
 
     respond_to do |format|
       if @post.save
@@ -67,6 +70,11 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def set_author
+      if params[:author_id] 
+        @author = Author.find(params[:author_id])
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :introduction, :body)
