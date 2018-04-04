@@ -15,6 +15,10 @@
   <%= @post.body %>
 </p>
 
+<p>
+  <strong>Image</strong>
+  <%= image_tag @post.image.url(:small) %>
+</p>
 <% if @author %>
 
 <%= link_to 'Edit', edit_author_post_path(@author, @post) %> |
