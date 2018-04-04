@@ -19,8 +19,11 @@
         <td><%= post.introduction %></td>
         <td><%= post.body %></td>
         <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_author_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if @author %>
+          <td><%= link_to 'Edit', edit_author_post_path(@author, post) %></td>
+          <td><%= link_to 'Destroy', [@author, post], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
